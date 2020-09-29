@@ -7,42 +7,54 @@
       <h1>{{ title }}</h1>
       <p v-if="inStock">In Stock</p>
       <p v-else>Out of Stock</p>
+      <!-- </div>
+
+    <div> -->
+      <p>
+        shipping : <span v-if="inStock">free</span> <span v-else>2.99</span>
+      </p>
+
+      <ul>
+        <li v-for="detail in details" :key="detail">{{ detail }}</li>
+      </ul>
+
+      <div
+        class="color-box"
+        v-for="(variant, index) in variants"
+        :key="variant.varaintId"
+        :style="{ 'background-color': variant.variantColor }"
+        @mouseover="updateProduct(index)"
+      ></div>
+
+      <button
+        @click="addToCart"
+        :disabled="!inStock"
+        :class="{ disabledButton: !inStock }"
+      >
+        Add to Cart
+      </button>
+      <div class="cart">
+        <p>Cart({{ cart }})</p>
+      </div>
+      <br>
+      <br>
+
+
+
+    <Review />
     </div>
 
-    <div>
-        <p>
-            shipping : <span v-if="inStock">free</span> <span v-else>2.99</span>
-        </p>
-    </div>
-
-    <ul>
-      <li v-for="detail in details" :key="detail">{{ detail }}</li>
-    </ul>
-
-    <div
-      class="color-box"
-      v-for="(variant, index) in variants"
-      :key="variant.varaintId"
-      :style="{ 'background-color': variant.variantColor }"
-      @mouseover="updateProduct(index)"
-    ></div>
-
-    <button
-      @click="addToCart"
-      :disabled="!inStock"
-      :class="{ disabledButton: !inStock }"
-    >
-      Add to Cart
-    </button>
-    <div class="cart">
-      <p>Cart({{ cart }})</p>
-    </div>
   </div>
 </template>
 
 <script>
+import Review from "../components/Review";
 export default {
   name: "Main",
+  components: {
+    Review,
+  },
+
   data() {
     return {
       brand: "Vue Mastery",
